@@ -1,9 +1,3 @@
-# alpine_sshd
-
-
-## Dockerfile
-```
-#FROM alpine:3.7
 FROM hermsi/alpine-sshd:latest
 
 MAINTAINER YANG SEN <nuaays@gmail.com>
@@ -28,20 +22,7 @@ RUN echo http://mirrors.aliyun.com/alpine/v3.7/main > /etc/apk/repositories && \
     sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     sed -i 's/UsePAM yes/UsePAM no/' /etc/ssh/sshd_config && \
     sed -i 's/UsePrivilegeSeparation yes/UsePrivilegeSeparation no/' /etc/ssh/sshd_config  && \
-    #sed -i 's/.*session.*required.*pam_loginuid.so.*/session optional pam_loginuid.so/g' /etc/pam.d/sshd && \
     adduser -D -h /home/${USERNAME} -s /bin/bash -u 1000 ${USERNAME} && \
     echo "${USERNAME}:${ROOT_PASSWORD}" | chpasswd && \
     echo "root:${ROOT_PASSWORD}" | chpasswd && \
     rm -rf /var/cache/apk/* /tmp/*
-    #rm -f /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_ecdsa_key && \
-    #ssh-keygen -q -t rsa   -f /etc/ssh/ssh_host_rsa_key   -P '' -N '' && \
-    #ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -P '' -N ''
-    
-```
-
-
-
-## docker command
-```
-docker run -d -P --env ROOT_PASSWORD=123456 nuaays/alpine:sshd
-```
