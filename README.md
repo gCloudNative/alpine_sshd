@@ -38,3 +38,10 @@ RUN echo http://mirrors.aliyun.com/alpine/v3.7/main > /etc/apk/repositories && \
     #ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -P '' -N ''
     
 ```
+
+
+
+## docker command
+```
+docker run -d -P --env ROOT_PASSWORD=123456 nuaays/alpine:sshd
+```
